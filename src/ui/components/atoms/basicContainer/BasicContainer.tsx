@@ -2,16 +2,27 @@ import { FC } from "react"
 import { IBasicContainerProps } from "./types"
 import { BackgroundComponent, ContainerStyleComponent, ImageBackground } from "./styles.tw"
 
-export const BasicContainer: FC<IBasicContainerProps> = ({ children, backgroundComponent, imageBackground, }) => {
+export const BasicContainer: FC<IBasicContainerProps> = ({
+    children,
+    backgroundComponent,
+    imageBackground,
+    ...moreProps
+}) => {
     return (
-        <ContainerStyleComponent>
+        <ContainerStyleComponent
+            {...moreProps}
+        >
             <>
                 {children}
                 {backgroundComponent &&
-                    <BackgroundComponent />
+                    <BackgroundComponent
+                        {...backgroundComponent}
+                    />
                 }
                 {imageBackground &&
-                    <ImageBackground />
+                    <ImageBackground
+                        {...imageBackground}
+                    />
                 }
             </>
         </ContainerStyleComponent>

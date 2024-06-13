@@ -41,7 +41,7 @@ export type TWidth = PrefixW<TDimension>;
 
 export type THeight = PrefixW<TDimension>;
 
-export type TGap =
+type TSpace =
     | '0'
     | '1'
     | '2'
@@ -56,10 +56,7 @@ export type TGap =
     | 'y-1'
     | 'y-2'
     | 'y-4'
-    | 'y-6';
-
-export type TSpace =
-    | TGap
+    | 'y-6'
     | 'l-0'
     | 'l-1'
     | 'l-2'
@@ -80,6 +77,16 @@ export type TSpace =
     | 'b-2'
     | 'b-4'
     | 'b-6';
+
+type PrefixP<T extends string> = `p-${T}`;
+type PrefixM<T extends string> = `m-${T}`;
+type PrefixG<T extends string> = `gap-${T}`;
+
+export type TPadding = PrefixP<TSpace>;
+export type TMargin = PrefixM<TSpace>;
+export type TGap = PrefixG<TSpace>;
+
+
 
 export type TJustify =
     | 'justify-center'
@@ -127,7 +134,8 @@ export type TPosition =
 export type TDirection =
     | 'flex-row'
     | 'flex-col'
-    | 'flex-row-reverse';
+    | 'flex-row-reverse'
+    | 'flex-col-reverse';
 
 export type TFontSize =
     | 'text-8xl'
@@ -163,3 +171,25 @@ export type TDisplay =
     | 'table-row'
     | 'table-cell'
     | 'hidden';
+
+type Rounded =
+    | 'none'
+    | 'sm'
+    | 'md'
+    | 'lg'
+    | 'xl'
+    | '2xl'
+    | '3xl'
+    | 'full'
+    | `t-none` | `t-sm` | `t-md` | `t-lg` | `t-xl` | `t-2xl` | `t-3xl` | `t-full`
+    | `r-none` | `r-sm` | `r-md` | `r-lg` | `r-xl` | `r-2xl` | `r-3xl` | `r-full`
+    | `b-none` | `b-sm` | `b-md` | `b-lg` | `b-xl` | `b-2xl` | `b-3xl` | `b-full`
+    | `l-none` | `l-sm` | `l-md` | `l-lg` | `l-xl` | `l-2xl` | `l-3xl` | `l-full`
+    | `tl-none` | `tl-sm` | `tl-md` | `tl-lg` | `tl-xl` | `tl-2xl` | `tl-3xl` | `tl-full`
+    | `tr-none` | `tr-sm` | `tr-md` | `tr-lg` | `tr-xl` | `tr-2xl` | `tr-3xl` | `tr-full`
+    | `br-none` | `br-sm` | `br-md` | `br-lg` | `br-xl` | `br-2xl` | `br-3xl` | `br-full`
+    | `bl-none` | `bl-sm` | `bl-md` | `bl-lg` | `bl-xl` | `bl-2xl` | `bl-3xl` | `bl-full`;
+
+type PrefixR<T extends string> = `rounded-${T}`;
+
+export type TRounded = PrefixR<Rounded>;

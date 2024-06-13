@@ -1,28 +1,69 @@
 import { FC } from "react";
-import { IContainerStyleComponentProps } from "./types";
+import { IBackgroundComponent, IBackgroundImage, IContainerStyleComponentProps } from "./types";
 
-export const ContainerStyleComponent: FC<IContainerStyleComponentProps> = ({ children }) => {
+export const ContainerStyleComponent: FC<IContainerStyleComponentProps> = ({
+    children,
+    height,
+    mobileHeight,
+    mobileWidth,
+    width,
+    align,
+    cursor,
+    direction,
+    gap,
+    padding,
+    margin,
+    justyfy,
+    overflow,
+    position,
+    rounded,
+    style
+}) => {
     return (
         <div
-        className={``}
+            className={`
+             flex ${direction}
+             md:${height} md:${width}
+             ${mobileHeight} ${mobileWidth}
+             ${align} ${justyfy}
+             ${cursor}
+            relative
+            ${overflow}
+            ${rounded}
+            ${padding} ${margin} ${gap}
+            `}
+            style={style}
         >
             {children}
         </div>
     )
 }
 
-export const ImageBackground: FC = () => {
+export const ImageBackground: FC<IBackgroundImage> = ({ opacity, src }) => {
     return (
-        <img 
-        className={``}
-        src="" />
+        <img
+            className={`
+            w-full h-full
+            top-0 left-0
+            absolute
+            -z-10
+            ${opacity}
+            `}
+            src={src} />
     )
 }
 
-export const BackgroundComponent:FC = () => {
-    return(
+export const BackgroundComponent: FC<IBackgroundComponent> = ({ color, opacity }) => {
+    return (
         <span
-            className={``}
+            className={`
+                w-full h-full
+                top-0 left-0
+                absolute
+                -z-10
+               ${color === 'transparent' ? `bg-transparent dark:bg-transparent` : `bg-light-${color} dark:bg-dark-${color}`}
+               ${opacity}
+            `}
         />
     )
 }

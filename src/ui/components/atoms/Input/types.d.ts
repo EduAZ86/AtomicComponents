@@ -1,12 +1,15 @@
-import { THeight, TWidth } from '@/ui/types/tailwindStyleTypes';
+import { TCursor, THeight, TWidth } from '@/ui/types/tailwindStyleTypes';
+import { CSSProperties, FocusEventHandler } from 'react';
 import { FieldError, UseFormRegisterReturn } from 'react-hook-form';
 
-type inputType = 'text' | 'number' | 'email' | 'file' | 'area';
+type inputType = 'text' | 'number' | 'email' | 'file' | 'date';
 
 export interface IInputProps {
-    type: inputType;
+    type: inputType | 'area';
     width: TWidth;
+    mobileWidth: TWidth;
     height: THeight;
+    mobileHeight: THeight;
     name: string;
     register: UseFormRegisterReturn;
     onChange: (event: TOnChangeParamsInput | ChangeEvent<HTMLInputElement>) => void;
@@ -14,11 +17,10 @@ export interface IInputProps {
     error?: FieldError;
     placeholder?: string;
     style?: CSSProperties;
-    onFocus?: React.FocusEventHandler<HTMLInputElement>;
-    onBlur?: React.FocusEventHandler<HTMLInputElement>;
-    onChangeForm?: (...event: any[]) => void;
+    onFocus?: FocusEventHandler<HTMLInputElement> | FocusEventHandler<HTMLTextAreaElement>;
+    onBlur?: FocusEventHandler<HTMLInputElement> | FocusEventHandler<HTMLTextAreaElement>;
     maxLength?: number;
-    cursor?: string;
+    cursor?: TCursor;
     required?: boolean;
     rows?: number;
     cols?: number;
@@ -26,6 +28,11 @@ export interface IInputProps {
     min?: number | string;
 };
 
-export interface IBasicInputProps extends Omit<IInputProps, 'rows' | 'cols'> { };
+export interface IBasicInputProps extends Omit<IInputProps, 'rows' | 'cols' | 'type'> {
+    type: inputType;
+};
 
-export interface IBasicInputTextAreaProps extends Omit<IInputProps, 'min' | 'max'> { };
+export interface IBasicInputTextAreaProps extends Omit<IInputProps, 'min' | 'max' | 'type' | 'onFocus' | 'onBlur'> {
+    onFocus?: FocusEventHandler<HTMLTextAreaElement>;
+    onBlur?: FocusEventHandler<HTMLTextAreaElement>;
+};

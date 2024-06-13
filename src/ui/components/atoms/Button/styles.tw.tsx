@@ -16,8 +16,9 @@ export const ContentButton: FC<IContentButtonProps> = ({
     return (
         <button
             className={`
-                ${background && `dark:bg-dark-${background.dark} bg-light-${background.light} `}
-                ${color && `dark:bg-dark-${color.dark} bg-light-${color.light} `}
+            ${width}
+            ${background === 'transparent' ? `bg-transparent dark:bg-transparent` : `bg-light-${background} dark:bg-dark-${background}`}
+            ${color !== 'transparent' && `dark:text-dark-${color} text-light-${color} `}
             `}
             onClick={onClick}
             disabled={disabled}
